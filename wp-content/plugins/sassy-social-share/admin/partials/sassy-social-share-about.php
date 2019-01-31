@@ -16,7 +16,7 @@
 
 	<div style="margin-bottom: 21px">
 		<div class="inside" style="padding-top:10px">
-		<a target="_blank" style="text-decoration:none;" href="https://www.heateor.com/donate/?action=Sassy+Social+Share"><input type="button" style="background-color:#D51F1F" class="ss_demo" value="<?php _e( 'Donate', 'sassy-social-share' ) ?>" /></a>
+		<a target="_blank" style="text-decoration:none;" href="https://www.heateor.com/donate/?action=Sassy+Social+Share"><input type="button" style="background-color:#D51F1F;background: linear-gradient(#2e9fff, #2481d0);" class="ss_demo" value="<?php _e( 'Donate', 'sassy-social-share' ) ?>" /></a>
 		</div>
 	</div>
 	

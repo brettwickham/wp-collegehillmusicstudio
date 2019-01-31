@@ -66,7 +66,11 @@ class Sassy_Social_Share_Standard_Widget extends WP_Widget {
 		if ( $instance['hide_for_logged_in'] == 1 && is_user_logged_in() ) return;
 		
 		global $post;
-		$post_id = $post -> ID;
+		if ( NULL === $post ) {
+			$post_id = 0;
+		} else {
+			$post_id = $post->ID;
+		}
 		if ( isset( $instance['target_url'] ) ) {
 			if ( $instance['target_url'] == 'default' ) {
 				$sharing_url = html_entity_decode( esc_url( $this->public_class_object->get_http_protocol() . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ) );
@@ -490,55 +494,70 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 		$icon_style = 'width:'. $instance['size'] .'px;height:'. $instance['size'] .'px;'. ( $instance['icon_shape'] == 'round' ? 'border-radius:999px;' : '' );
 		$html .= '<ul class="heateor_sss_follow_ul">';
 		if ( $instance['facebook'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Facebook" title="Facebook" class="heateorSssSharing heateorSssFacebookBackground"><a target="_blank" href="'. $instance['facebook'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssFacebookSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Facebook" title="Facebook" class="heateorSssSharing heateorSssFacebookBackground"><a target="_blank" aria-label="Facebook" href="'. $instance['facebook'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssFacebookSvg"></ss></a></i></li>';
 		}
 		if ( $instance['twitter'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Twitter" title="Twitter" class="heateorSssSharing heateorSssTwitterBackground"><a target="_blank" href="'. $instance['twitter'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssTwitterSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Twitter" title="Twitter" class="heateorSssSharing heateorSssTwitterBackground"><a target="_blank" aria-label="Twitter" href="'. $instance['twitter'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssTwitterSvg"></ss></a></i></li>';
 		}
 		if ( $instance['instagram'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Instagram" title="Instagram" class="heateorSssSharing heateorSssInstagramBackground"><a target="_blank" href="'. $instance['instagram'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssInstagramSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Instagram" title="Instagram" class="heateorSssSharing heateorSssInstagramBackground"><a target="_blank" aria-label="Instagram" href="'. $instance['instagram'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssInstagramSvg"></ss></a></i></li>';
 		}
 		if ( $instance['pinterest'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Pinterest" title="Pinterest" class="heateorSssSharing heateorSssPinterestBackground"><a target="_blank" href="'. $instance['pinterest'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssPinterestSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Pinterest" title="Pinterest" class="heateorSssSharing heateorSssPinterestBackground"><a target="_blank" aria-label="Pinterest" href="'. $instance['pinterest'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssPinterestSvg"></ss></a></i></li>';
 		}
 		if ( $instance['behance'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Behance" title="Behance" class="heateorSssSharing heateorSssBehanceBackground"><a target="_blank" href="'. $instance['behance'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssBehanceSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Behance" title="Behance" class="heateorSssSharing heateorSssBehanceBackground"><a target="_blank" aria-label="Behance" href="'. $instance['behance'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssBehanceSvg"></ss></a></i></li>';
 		}
 		if ( $instance['flickr'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Flickr" title="Flickr" class="heateorSssSharing heateorSssFlickrBackground"><a target="_blank" href="'. $instance['flickr'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssFlickrSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Flickr" title="Flickr" class="heateorSssSharing heateorSssFlickrBackground"><a target="_blank" aria-label="Flickr" href="'. $instance['flickr'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssFlickrSvg"></ss></a></i></li>';
 		}
 		if ( $instance['foursquare'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Foursquare" title="Foursquare" class="heateorSssSharing heateorSssFoursquareBackground"><a target="_blank" href="'. $instance['foursquare'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssFoursquareSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Foursquare" title="Foursquare" class="heateorSssSharing heateorSssFoursquareBackground"><a target="_blank" aria-label="Foursquare" href="'. $instance['foursquare'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssFoursquareSvg"></ss></a></i></li>';
 		}
 		if ( $instance['github'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Github" title="Github" class="heateorSssSharing heateorSssGithubBackground"><a target="_blank" href="'. $instance['github'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssGithubSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Github" title="Github" class="heateorSssSharing heateorSssGithubBackground"><a target="_blank" aria-label="Github" href="'. $instance['github'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssGithubSvg"></ss></a></i></li>';
 		}
 		if ( $instance['google'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Google+" title="Google+" class="heateorSssSharing heateorSssGoogleplusBackground"><a target="_blank" href="'. $instance['google'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssGoogleplusSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Google+" title="Google+" class="heateorSssSharing heateorSssGoogleplusBackground"><a target="_blank" aria-label="Google+" href="'. $instance['google'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssGoogleplusSvg"></ss></a></i></li>';
 		}
 		if ( $instance['linkedin'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Linkedin" title="Linkedin" class="heateorSssSharing heateorSssLinkedinBackground"><a target="_blank" href="'. $instance['linkedin'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssLinkedinSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Linkedin" title="Linkedin" class="heateorSssSharing heateorSssLinkedinBackground"><a target="_blank" aria-label="Linkedin" href="'. $instance['linkedin'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssLinkedinSvg"></ss></a></i></li>';
 		}
 		if ( $instance['linkedin_company'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Linkedin Company" title="Linkedin Company" class="heateorSssSharing heateorSssLinkedinBackground"><a target="_blank" href="'. $instance['linkedin_company'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssLinkedinSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Linkedin Company" title="Linkedin Company" class="heateorSssSharing heateorSssLinkedinBackground"><a target="_blank" aria-label="Linkedin Company" href="'. $instance['linkedin_company'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssLinkedinSvg"></ss></a></i></li>';
+		}
+		if ( $instance['medium'] ) {
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Medium" title="Medium" class="heateorSssSharing heateorSssMediumBackground"><a target="_blank" aria-label="Medium" href="'. $instance['medium'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssMediumSvg"></ss></a></i></li>';
+		}
+		if ( $instance['mewe'] ) {
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="MeWe" title="MeWe" class="heateorSssSharing heateorSssMeWeBackground"><a target="_blank" aria-label="MeWe" href="'. $instance['mewe'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssMeWeSvg"></ss></a></i></li>';
+		}
+		if ( $instance['odnoklassniki'] ) {
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Odnoklassniki" title="Odnoklassniki" class="heateorSssSharing heateorSssOdnoklassnikiBackground"><a target="_blank" aria-label="Odnoklassniki" href="'. $instance['odnoklassniki'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssOdnoklassnikiSvg"></ss></a></i></li>';
 		}
 		if ( $instance['snapchat'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Snapchat" title="Snapchat" class="heateorSssSharing heateorSssSnapchatBackground"><a target="_blank" href="'. $instance['snapchat'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssSnapchatSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Snapchat" title="Snapchat" class="heateorSssSharing heateorSssSnapchatBackground"><a target="_blank" aria-label="Snapchat" href="'. $instance['snapchat'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssSnapchatSvg"></ss></a></i></li>';
 		}
 		if ( $instance['tumblr'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Tumblr" title="Tumblr" class="heateorSssSharing heateorSssTumblrBackground"><a target="_blank" href="'. $instance['tumblr'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssTumblrSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Tumblr" title="Tumblr" class="heateorSssSharing heateorSssTumblrBackground"><a target="_blank" aria-label="Tumblr" href="'. $instance['tumblr'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssTumblrSvg"></ss></a></i></li>';
 		}
 		if ( $instance['vimeo'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Vimeo" title="Vimeo" class="heateorSssSharing heateorSssVimeoBackground"><a target="_blank" href="'. $instance['vimeo'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssVimeoSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Vimeo" title="Vimeo" class="heateorSssSharing heateorSssVimeoBackground"><a target="_blank" aria-label="Vimeo" href="'. $instance['vimeo'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssVimeoSvg"></ss></a></i></li>';
+		}
+		if ( $instance['vkontakte'] ) {
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Vkontakte" title="Vkontakte" class="heateorSssSharing heateorSssVkontakteBackground"><a target="_blank" aria-label="Vkontakte" href="'. $instance['vkontakte'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssVkontakteSvg"></ss></a></i></li>';
+		}
+		if ( $instance['xing'] ) {
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Xing" title="Xing" class="heateorSssSharing heateorSssXingBackground"><a target="_blank" aria-label="Xing" href="'. $instance['xing'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssXingSvg"></ss></a></i></li>';
 		}
 		if ( $instance['youtube'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Youtube" title="Youtube" class="heateorSssSharing heateorSssYoutubeBackground"><a target="_blank" href="'. $instance['youtube'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssYoutubeSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Youtube" title="Youtube" class="heateorSssSharing heateorSssYoutubeBackground"><a target="_blank" aria-label="Youtube" href="'. $instance['youtube'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssYoutubeSvg"></ss></a></i></li>';
 		}
 		if ( $instance['youtube_channel'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Youtube Channel" title="Youtube Channel" class="heateorSssSharing heateorSssYoutubeBackground"><a target="_blank" href="'. $instance['youtube_channel'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssYoutubeSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="Youtube Channel" title="Youtube Channel" class="heateorSssSharing heateorSssYoutubeBackground"><a target="_blank" aria-label="Youtube Channel" href="'. $instance['youtube_channel'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssYoutubeSvg"></ss></a></i></li>';
 		}
 		if ( $instance['rss_feed'] ) {
-			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="RSS Feed" title="RSS Feed" class="heateorSssSharing heateorSssRSSBackground"><a target="_blank" href="'. $instance['rss_feed'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssRSSSvg"></ss></a></i></li>';
+			$html .= '<li class="heateorSssSharingRound"><i style="'. $icon_style .'" alt="RSS Feed" title="RSS Feed" class="heateorSssSharing heateorSssRSSBackground"><a target="_blank" aria-label="RSS Feed" href="'. $instance['rss_feed'] .'" rel="noopener"><ss style="display:block" class="heateorSssSharingSvg heateorSssRSSSvg"></ss></a></i></li>';
 		}
 		$html = apply_filters( 'heateor_sss_follow_icons', $html, $instance, $icon_style );
 		$html .= '</ul>';
@@ -567,12 +586,18 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 		$instance['flickr'] = $new_instance['flickr'];
 		$instance['foursquare'] = $new_instance['foursquare'];
 		$instance['github'] = $new_instance['github'];
+		$instance['gitlab'] = $new_instance['gitlab'];
 		$instance['google'] = $new_instance['google'];
 		$instance['linkedin'] = $new_instance['linkedin'];
 		$instance['linkedin_company'] = $new_instance['linkedin_company'];
+		$instance['medium'] = $new_instance['medium'];
+		$instance['mewe'] = $new_instance['mewe'];
+		$instance['odnoklassniki'] = $new_instance['odnoklassniki'];
 		$instance['snapchat'] = $new_instance['snapchat'];
 		$instance['tumblr'] = $new_instance['tumblr'];
 		$instance['vimeo'] = $new_instance['vimeo'];
+		$instance['vkontakte'] = $new_instance['vkontakte'];
+		$instance['xing'] = $new_instance['xing'];
 		$instance['youtube'] = $new_instance['youtube'];
 		$instance['youtube_channel'] = $new_instance['youtube_channel'];
 		$instance['rss_feed'] = $new_instance['rss_feed'];
@@ -591,7 +616,7 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 	public function form( $instance ) { 
 		
 		/* default widget settings. */ 
-		$defaults = array( 'title' => '', 'size' => '32', 'icon_shape' => 'round', 'facebook' => '', 'twitter' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'google' => '', 'linkedin' => '', 'linkedin_company' => '', 'snapchat' => '', 'tumblr' => '', 'vimeo' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '' );
+		$defaults = array( 'title' => '', 'size' => '32', 'icon_shape' => 'round', 'facebook' => '', 'twitter' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'gitlab' => '', 'google' => '', 'linkedin' => '', 'linkedin_company' => '', 'medium' => '', 'mewe' => '', 'odnoklassniki' => '', 'snapchat' => '', 'tumblr' => '', 'vimeo' => '', 'vkontakte' => '', 'xing' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '' );
 
 		foreach ( $instance as $key => $value ) {
 			if ( is_string( $value ) ) {
@@ -646,6 +671,15 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'linkedin_company' ); ?>"><?php _e( 'LinkedIn Company URL:', 'sassy-social-share' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'linkedin_company' ); ?>" name="<?php echo $this->get_field_name( 'linkedin_company' ); ?>" type="text" value="<?php echo $instance['linkedin_company']; ?>" /><br/>
 			<span>https://www.linkedin.com/company/ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'medium' ); ?>"><?php _e( 'Medium URL:', 'sassy-social-share' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'medium' ); ?>" name="<?php echo $this->get_field_name( 'medium' ); ?>" type="text" value="<?php echo $instance['medium']; ?>" /><br/>
+			<span>https://medium.com/@ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'mewe' ); ?>"><?php _e( 'MeWe URL:', 'sassy-social-share' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'mewe' ); ?>" name="<?php echo $this->get_field_name( 'mewe' ); ?>" type="text" value="<?php echo $instance['mewe']; ?>" /><br/>
+			<span>https://mewe.com/profile/ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>"><?php _e( 'Odnoklassniki URL:', 'sassy-social-share' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>" name="<?php echo $this->get_field_name( 'odnoklassniki' ); ?>" type="text" value="<?php echo $instance['odnoklassniki']; ?>" /><br/>
+			<span>https://ok.ru/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'snapchat' ); ?>"><?php _e( 'Snapchat URL:', 'sassy-social-share' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'snapchat' ); ?>" name="<?php echo $this->get_field_name( 'snapchat' ); ?>" type="text" value="<?php echo $instance['snapchat']; ?>" /><br/>
 			<span>https://www.snapchat.com/add/ID</span><br/><br/>
@@ -655,6 +689,12 @@ class Sassy_Social_Share_Follow_Widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'vimeo' ); ?>"><?php _e( 'Vimeo URL:', 'sassy-social-share' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vimeo' ); ?>" name="<?php echo $this->get_field_name( 'vimeo' ); ?>" type="text" value="<?php echo $instance['vimeo']; ?>" /><br/>
 			<span>https://vimeo.com/ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'vkontakte' ); ?>"><?php _e( 'Vkontakte URL:', 'sassy-social-share' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vkontakte' ); ?>" name="<?php echo $this->get_field_name( 'vkontakte' ); ?>" type="text" value="<?php echo $instance['vkontakte']; ?>" /><br/>
+			<span>https://vk.com/ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'xing' ); ?>"><?php _e( 'Xing URL:', 'sassy-social-share' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'xing' ); ?>" name="<?php echo $this->get_field_name( 'xing' ); ?>" type="text" value="<?php echo $instance['xing']; ?>" /><br/>
+			<span>https://www.xing.com/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'youtube' ); ?>"><?php _e( 'Youtube URL:', 'sassy-social-share' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'youtube' ); ?>" name="<?php echo $this->get_field_name( 'youtube' ); ?>" type="text" value="<?php echo $instance['youtube']; ?>" /><br/>
 			<span>https://www.youtube.com/user/ID</span><br/><br/>
